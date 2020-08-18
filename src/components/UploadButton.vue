@@ -63,10 +63,10 @@ export default {
       Object.keys(structure).forEach(dummy => {
         if(structure[dummy].meta.column){
           if(Object.keys(obj).includes(dummy.toLowerCase())){
-            // var typeArray = structure[dummy].meta.type;
-            // if (!typeArray.includes(typeof(obj[dummy.toLowerCase()]))){
-            //   return alert;
-            // }
+            var typeArray = structure[dummy].meta.type;
+            if (!typeArray.includes(typeof(obj[dummy.toLowerCase()]))){
+               return alert("Type not matching for " + dummy.toLowerCase()); //alert should stop the functioning then and there
+            }
             structure[dummy] = obj[dummy.toLowerCase()];
           } else{ //If it is not mandatory and data is not there
             delete structure[dummy];
@@ -93,19 +93,19 @@ export default {
           const wsname = workbook.SheetNames[0]; //Taking name of the first sheet in the sheets
           const a = workbook.Sheets[wsname];
           const ws = XLSX.utils.sheet_to_json(a); // Generate JSON table content from the data of the first sheet
-          //ws is an array of objects with each object representing each row of the excel sheet
-          
+          //ws is an array of objects with each object representing each row of the excel sheet 
           
           
           const headers = this.getHeader(a);
           console.log('headers', headers);
           const lowHeaders = headers.map(header => header.toLowerCase().replace(/[ ,.-]/g, ""));//Converts names of headers to lower case and removes any spaces, dots, hyphens, commas
-          console.log(lowHeaders);
+          console.log('lowHeaders',lowHeaders);
 
 
-          this.getMandFields(this.dataStruct);  
+          this.getMandFields(this.dataStruct);
+          console.log('Mand', this.mand);  
           const lowMand = this.mand.map(e => e.toLowerCase());
-          console.log(lowMand);
+          console.log('lowMand',lowMand);
           lowMand.forEach(function(entry){
             if(!lowHeaders.includes(entry)){              
               return alert("Mandatory field '" + entry + "' not present in the file!");//after alert it shouldn't continue functioning anymore

@@ -15,14 +15,14 @@ export default {
         startDate: {
           meta:{
             column: true,
-            type: [Date],
+            type: ["string"],
             mandatory: true
           }
         },
         xyz:{
           meta:{
             column: true,
-            type: [Number],
+            type: ["number"],
             mandatory: false
           }
         },
@@ -34,22 +34,29 @@ export default {
             subcontractor: {
               meta: {
               column: true,
-              type: [String, Number],
+              type: ["string", "number"],
               mandatory: false
               }
             },
             equipment: {
               meta: {
                 column: true,
-                type: [String, Number],
+                type: ["string", "number"],
                 mandatory: true
               }
             },
             abc: {
               meta: {
-                column: true,
-                type: [String],
-                mandatory: false
+                column: false,
+              },
+              fields: {
+                SNo: {
+                  meta:{
+                    column: true,
+                    type: ["string", "number"],
+                    mandatory: true
+                  }
+                }
               }
             }
           }  
