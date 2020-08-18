@@ -105,29 +105,19 @@ export default {
           
           
           const headers = this.getHeader(a);
-          console.log('headers', headers);
-          const lowHeaders = headers.map(header => header.toLowerCase().replace(/[ ,.-]/g, ""));//Converts names of headers to lower case and removes any spaces, dots, hyphens, commas
-          console.log('lowHeaders',lowHeaders);
+          const lowHeaders = headers.map(header => header.toLowerCase().replace(/[ ,.-]/g, ""));
+          //Converts names of headers to lower case and removes any spaces, dots, hyphens, commas
+          
 
 
-          this.getMandFields(this.dataStruct);
-          console.log('Mand', this.mand);  
+          this.getMandFields(this.dataStruct);  
           const lowMand = this.mand.map(e => e.toLowerCase());
-          console.log('lowMand',lowMand);
           lowMand.forEach(function(entry){
             if(!lowHeaders.includes(entry)){              
-              return alert("Mandatory field '" + entry + "' not present in the file!");//after alert it shouldn't continue functioning anymore
+              return alert("Mandatory field '" + entry + "' not present in the file!");
+              //after alert it shouldn't continue functioning anymore
             } 
           });
-
-          
-          
-          
-          
-         
-        console.log('ws[0]',ws[0]);
-
-
 
           const excellist = []; //To edit received data
           for (var j = 0; j < ws.length; j++) {
@@ -141,10 +131,10 @@ export default {
             var structure = cloneDeep(this.dataStruct);
             this.convertData(obj, structure);
             excellist.push(structure);
+            //an array containing objects that needs to be processed
           }
-          //console.log("Read results", excellist); // an array containing objects that need to be processed
           var myJSON = JSON.stringify(excellist);
-          console.log(myJSON);
+          console.log('json =',myJSON);
         } catch (e) {
           //return alert("Read failure!");
           console.log(e);
