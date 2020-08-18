@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <UploadButton v-bind:dataStruct="dataStruct"/>
+    <UploadButton v-bind:dataStruct="dataStruct" v-bind:titleText="titleText"/>
   </div>
 </template>
 
@@ -11,6 +11,7 @@ export default {
   name: 'App',
   data() {
     return {
+      titleText: "Upload File",
       dataStruct: {
         startDate: {
           meta:{

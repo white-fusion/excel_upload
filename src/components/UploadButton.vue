@@ -1,6 +1,12 @@
 <template>
   <div class="button_group">
-    <input type="file" class="my_input" @change="importExcel" id="upload" accept=".xls, .xlsx"/>
+    <input type="file" class="my_input" @change="importExcel" style="display:none" id="upload" accept=".xls, .xlsx"/>
+    <button
+      class="upload-button"
+      onclick="document.getElementById('upload').click()"
+    >
+      {{this.titleText}}
+    </button>
   </div>
 </template>
 
@@ -12,11 +18,12 @@ export default {
   props: {
     dataStruct: {
       type: Object
-    }
+    },
+    titleText: String
   },
   data() {
     return {
-      mand: [] //Don't forget to free the array after the work.
+      mand: [], //Don't forget to free the array after the work.
     }  
   },
   methods: {
@@ -154,6 +161,17 @@ export default {
 </script>
 
 
-<style scoped>
-
+<style lang="scss" scoped>
+.upload-button {
+  background: linear-gradient(137deg, #f25e45, #f79048);
+  text-align: center;
+  color: white;
+  height: 38px;
+  font-weight: bold;
+  border-radius: 6px;
+  padding: 5%;
+  font-size: small;
+  margin-top: 3%;
+  width: 100%;
+}
 </style>
