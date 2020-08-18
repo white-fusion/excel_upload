@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <UploadButton msg="Welcome to Your Vue.js App"/>
+    <UploadButton v-bind:dataStruct="dataStruct"/>
   </div>
 </template>
 
@@ -9,6 +9,40 @@ import UploadButton from './components/UploadButton.vue'
 
 export default {
   name: 'App',
+  data() {
+    return {
+      dataStruct: {
+        startDate: {
+          meta:{
+            column: true,
+            type: [Date],
+            mandatory: true
+          }
+        },
+        estimates: {
+          meta: {
+            column: false
+          },
+          fields: {
+            subcontractor: {
+              meta: {
+              column: true,
+              type: [String, Number],
+              mandatory: false
+              }
+            },
+            equipment: {
+              meta: {
+                column: true,
+                type: [String, Number],
+                mandatory: true
+              }
+            }
+          }  
+        }
+      }
+    }
+  },
   components: {
     UploadButton
   }
