@@ -19,6 +19,13 @@ export default {
             mandatory: true
           }
         },
+        xyz:{
+          meta:{
+            column: true,
+            type: [Number],
+            mandatory: false
+          }
+        },
         estimates: {
           meta: {
             column: false
@@ -36,6 +43,13 @@ export default {
                 column: true,
                 type: [String, Number],
                 mandatory: true
+              }
+            },
+            abc: {
+              meta: {
+                column: true,
+                type: [String],
+                mandatory: false
               }
             }
           }  
