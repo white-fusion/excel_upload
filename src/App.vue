@@ -15,7 +15,7 @@ export default {
         startDate: {
           meta:{
             column: true,
-            type: ["string"],
+            type: ["date"],
             mandatory: true
           }
         },

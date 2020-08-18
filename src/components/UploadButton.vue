@@ -64,8 +64,8 @@ export default {
         if(structure[dummy].meta.column){
           if(Object.keys(obj).includes(dummy.toLowerCase())){
             var typeArray = structure[dummy].meta.type;
-            if (!typeArray.includes(typeof(obj[dummy.toLowerCase()]))){
-               return alert("Type not matching for " + dummy.toLowerCase()); //alert should stop the functioning then and there
+            if ((!typeArray.includes("date")) && (!typeArray.includes(typeof(obj[dummy.toLowerCase()])))){
+               console.log("Type not matching for " + dummy.toLowerCase()); //alert should stop the functioning then and there
             }
             structure[dummy] = obj[dummy.toLowerCase()];
           } else{ //If it is not mandatory and data is not there
@@ -88,7 +88,8 @@ export default {
           const data = ev.target.result;
           const XLSX = xlsx;
           const workbook = XLSX.read(data, {
-            type: "binary"
+            type: "binary",
+            cellDates:true
           });
           const wsname = workbook.SheetNames[0]; //Taking name of the first sheet in the sheets
           const a = workbook.Sheets[wsname];
@@ -117,7 +118,7 @@ export default {
           
           
          
-
+        console.log('ws[0]',ws[0]);
 
 
 
