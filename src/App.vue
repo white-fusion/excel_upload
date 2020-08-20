@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <UploadButton v-bind:dataStruct="dataStruct" v-bind:titleText="titleText"/>
+    <UploadButton @onSubmit="submit" v-bind:dataStruct="dataStruct" v-bind:titleText="titleText"/>
   </div>
 </template>
 
@@ -9,59 +9,121 @@ import UploadButton from './components/UploadButton.vue'
 
 export default {
   name: 'App',
+  methods:{
+    submit(obj){
+      console.log(obj);
+    }
+  },
   data() {
     return {
       titleText: "Upload File",
       dataStruct: {
         startDate: {
           meta:{
-            column: true,
+            hasSubfields: false,
+            type: ["date"],
+            mandatory: false
+          }
+        },
+        endDate: {
+          meta: {
+            hasSubfields: false,
             type: ["date"],
             mandatory: true
           }
         },
-        xyz:{
-          meta:{
-            column: true,
+        estimatedTime: {
+          meta: {
+            hasSubfields: false,
             type: ["number"],
+            mandatory: false,
+            default: 0
+          }
+        },
+        estimate: {
+          meta: {
+            hasSubfields: true
+          },
+          fields: {
+            estimateLabor: {
+              meta: {
+                hasSubfields: false,
+                type: ["number"],
+                mandatory: false,
+                //default: 0
+              }
+            },
+            estimateEquipment: {
+              meta: {
+                hasSubfields: false,
+                type: ["number"],
+                mandatory: false,
+                default: 0
+              }
+            },
+            estimateMaterial: {
+              meta: {
+                hasSubfields: false,
+                type: ["number"],
+                mandatory: false,
+                default: 0
+              }
+            },
+            estimateOthers: {
+              meta: {
+                hasSubfields: false,
+                type: ["number"],
+                mandatory: false,
+                default: 0
+              }
+            },
+            estimateSub: {
+              meta: {
+                hasSubfields: false,
+                type: ["number"],
+                mandatory: false,
+                default: 0
+              }
+            },
+            estimateBidValue: {
+              meta: {
+                hasSubfields: false,
+                type: ["number"],
+                mandatory: false,
+                default: 0
+              }
+            }
+          }
+        },
+        orderSequence: {
+          meta: {
+            hasSubfields: false,
+            type: ["string"],
+            mandatory: false,
+            default: ''
+          }
+        },
+        taskCode: {
+          meta: {
+            hasSubfields: false,
+            type: ["number"],
+            mandatory: true
+          }
+        },
+        title: {
+          meta: {
+            hasSubfields: false,
+            type: ["string"],
             mandatory: false
           }
         },
-        estimates: {
+        type: {
           meta: {
-            column: false
-          },
-          fields: {
-            subcontractor: {
-              meta: {
-              column: true,
-              type: ["string", "number"],
-              mandatory: false
-              }
-            },
-            equipment: {
-              meta: {
-                column: true,
-                type: ["string", "number"],
-                mandatory: true
-              }
-            },
-            abc: {
-              meta: {
-                column: false,
-              },
-              fields: {
-                SNo: {
-                  meta:{
-                    column: true,
-                    type: ["string", "number"],
-                    mandatory: true
-                  }
-                }
-              }
-            }
-          }  
-        }
+            hasSubfields: false,
+            mandatory: false,
+            default: 'F'
+          }
+        } 
       }
     }
   },

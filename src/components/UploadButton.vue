@@ -23,7 +23,8 @@ export default {
   },
   data() {
     return {
-      mand: [], //Don't forget to free the array after the work.
+      mand: [], 
+      problem: false
     }  
   },
   methods: {
@@ -57,7 +58,7 @@ export default {
     },
     getMandFields(structure) {
       Object.keys(structure).forEach(dummy => {
-        if(structure[dummy].meta.column && structure[dummy].meta.mandatory){ 
+        if(!structure[dummy].meta.hasSubfields && structure[dummy].meta.mandatory){ 
           this.mand.push(dummy);
         }else {
           if(structure[dummy].fields){
@@ -68,17 +69,25 @@ export default {
     },
     convertData(obj, structure){
       Object.keys(structure).forEach(dummy => {
-        if(structure[dummy].meta.column){
+        if(!structure[dummy].meta.hasSubfields){//If it has no subfields
           if(Object.keys(obj).includes(dummy.toLowerCase())){
             var typeArray = structure[dummy].meta.type;
-            if ((!typeArray.includes("date")) && (!typeArray.includes(typeof(obj[dummy.toLowerCase()])))){
-               console.log("Type not matching for " + dummy.toLowerCase()); //alert should stop the functioning then and there
+            if(typeArray.includes("date")){
+              obj[dummy.toLowerCase()] = new Date(obj[dummy.toLowerCase()].replace(/-/g, "/"));
+              obj[dummy.toLowerCase()] = obj[dummy.toLowerCase()].getTime(); 
+            } else if (!typeArray.includes(typeof(obj[dummy.toLowerCase()]))){
+              this.$emit('onSubmit',"Type not matching for " + dummy.toLowerCase());
+              this.problem = true; 
             }
             structure[dummy] = obj[dummy.toLowerCase()];
           } else{ //If it is not mandatory and data is not there
-            delete structure[dummy];
+            if(structure[dummy].meta.default === undefined){
+              delete structure[dummy];
+            }else{
+            structure[dummy] = structure[dummy].meta.default;
+            }
           }
-        } else if(!structure[dummy].meta.column){//If it is not a column
+        } else if(structure[dummy].meta.hasSubfields){//If it has subfields
           structure[dummy] = structure[dummy].fields; //deletes meta and fields and directly bring up all subfields as an object
           this.convertData(obj, structure[dummy]);
         }
@@ -95,8 +104,7 @@ export default {
           const data = ev.target.result;
           const XLSX = xlsx;
           const workbook = XLSX.read(data, {
-            type: "binary",
-            cellDates:true
+            type: "binary"
           });
           const wsname = workbook.SheetNames[0]; //Taking name of the first sheet in the sheets
           const a = workbook.Sheets[wsname];
@@ -112,10 +120,10 @@ export default {
 
           this.getMandFields(this.dataStruct);  
           const lowMand = this.mand.map(e => e.toLowerCase());
-          lowMand.forEach(function(entry){
-            if(!lowHeaders.includes(entry)){              
-              return alert("Mandatory field '" + entry + "' not present in the file!");
-              //after alert it shouldn't continue functioning anymore
+          lowMand.forEach((entry)=>{
+            if(!lowHeaders.includes(entry)){             
+              this.$emit('onSubmit',"Mandatory field '" + entry + "' not present in the file!");
+              this.problem = true;
             } 
           });
 
@@ -133,10 +141,12 @@ export default {
             excellist.push(structure);
             //an array containing objects that needs to be processed
           }
+          
           var myJSON = JSON.stringify(excellist);
-          console.log('json =',myJSON);
+          if(this.problem ==0){
+            this.$emit('onSubmit',myJSON);
+          }  
         } catch (e) {
-          //return alert("Read failure!");
           console.log(e);
         }
       };
@@ -144,6 +154,8 @@ export default {
       
       var input = document.getElementById("upload");
       input.value = "";
+      this.mand =[];
+      this.problem = false;
       
     }
   }
