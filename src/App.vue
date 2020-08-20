@@ -50,7 +50,7 @@ export default {
                 hasSubfields: false,
                 type: ["number"],
                 mandatory: false,
-                //default: 0
+                default: 0
               }
             },
             estimateEquipment: {
