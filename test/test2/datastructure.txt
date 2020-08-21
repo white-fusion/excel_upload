@@ -1,23 +1,4 @@
-<template>
-  <div id="app">
-    <UploadButton @onSubmit="submit" v-bind:dataStruct="dataStruct" v-bind:titleText="titleText"/>
-  </div>
-</template>
-
-<script>
-import UploadButton from './components/UploadButton.vue'
-
-export default {
-  name: 'App',
-  methods:{
-    submit(obj){
-      console.log(obj);
-    }
-  },
-  data() {
-    return {
-      titleText: "Upload File",
-      dataStruct: {
+dataStruct: {
         employee:{
           meta: {
             hasSubfields: true
@@ -53,22 +34,4 @@ export default {
             }
           }
         }
-      }  
-    }
-  },
-  components: {
-    UploadButton
-  }
-}
-</script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+      } 

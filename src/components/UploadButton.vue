@@ -113,7 +113,7 @@ export default {
           
           
           const headers = this.getHeader(a);
-          const lowHeaders = headers.map(header => header.toLowerCase().replace(/[ ,.-]/g, ""));
+          const lowHeaders = headers.map(header => header.toLowerCase().replace(/[ ,.&-]/g, ""));
           //Converts names of headers to lower case and removes any spaces, dots, hyphens, commas
           
 
@@ -134,7 +134,7 @@ export default {
             var obj={}
             while (n--) {
               key = keys[n];
-              obj[key.toLowerCase().replace(/[ ,.-]/g, "")] = ws[j][key];
+              obj[key.toLowerCase().replace(/[ ,.&-]/g, "")] = ws[j][key];
             }
             var structure = cloneDeep(this.dataStruct);
             this.convertData(obj, structure);
