@@ -2,7 +2,6 @@
   <div class="button_group">
     <input type="file" class="my_input" @change="importExcel" style="display:none" id="upload" accept=".xls, .xlsx"/>
     <button
-      class="upload-button"
       onclick="document.getElementById('upload').click()"
     >
       {{this.titleText}}
@@ -142,7 +141,8 @@ export default {
             //an array containing objects that needs to be processed
           }
           
-          var myJSON = JSON.stringify(excellist);
+          // var myJSON = JSON.stringify(excellist);
+          const myJSON = excellist;
           if(this.problem ==0){
             this.$emit('onSubmit',myJSON);
           }  
@@ -163,17 +163,4 @@ export default {
 </script>
 
 
-<style lang="scss" scoped>
-.upload-button {
-  background: linear-gradient(137deg, #f25e45, #f79048);
-  text-align: center;
-  color: white;
-  height: 38px;
-  font-weight: bold;
-  border-radius: 6px;
-  padding: 5%;
-  font-size: small;
-  margin-top: 3%;
-  width: 100%;
-}
-</style>
+

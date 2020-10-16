@@ -16,41 +16,55 @@ export default {
   },
   data() {
     return {
-      titleText: "Upload File",
+      titleText: "UPLOAD",
       dataStruct: {
-        employee:{
+        companyName: {
           meta: {
-            hasSubfields: true
-          },
-          fields: {
-            employeeID: {
-              meta: {
-                hasSubfields: false,
-                type: ["string", "number"],
-                mandatory: true
-              }
-            },
-            ctc: {
-              meta: {
-                hasSubfields: false,
-                type: ["number"],
-                mandatory: true
-              }
-            },
-            tmRate: {
-              meta: {
-                hasSubfields: false,
-                type: ["number"],
-                mandatory: true
-              }
-            },
-            fbRate: {
-              meta: {
-                hasSubfields: false,
-                type: ["number"],
-                mandatory: true
-              }
-            }
+            hasSubfields: false,
+            type: ['string'],
+            mandatory: true
+          }
+        },
+        businessType: {
+          meta: {
+            hasSubfields: false,
+            type: ['string'],
+            mandatory: false
+          }
+        },
+        contactName: {
+          meta: {
+            hasSubfields: false,
+            type: ['string'],
+            mandatory: false
+          }
+        },
+        title: {
+          meta: {
+            hasSubfields: false,
+            type: ['string'],
+            mandatory: false
+          }
+        },
+        email: {
+          meta: {
+            hasSubfields: false,
+            type: ['string'],
+            mandatory: false
+          }
+        },
+        country: {
+          meta: {
+            hasSubfields: false,
+            type: ['string'],
+            mandatory: false
+          }
+        },
+        phone: {
+          meta: {
+            hasSubfields: false,
+            type: ['string'],
+            mandatory: false
           }
         }
       }  
