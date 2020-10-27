@@ -2,7 +2,7 @@
   <div class="button_group">
     <input type="file" class="my_input" @change="importExcel" style="display:none" id="upload" accept=".xls, .xlsx"/>
     <button
-      onclick="document.getElementById('upload').click()"
+      onclick="document.getElementById('upload').click()" style="font-weight:bold;font-size:14px;"
     >
       {{this.titleText}}
     </button>
